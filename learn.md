@@ -36,24 +36,12 @@
    - **[Annotations in Java Frameworks](#annotations-in-java-frameworks)**
 
 ## XML:
-### 1. **Basics of XML**
-   - **What is XML?**
-   - **Purpose of XML in Android development**
-
-### 2. **Structure**
-   - **Declaration (`<?xml version="1.0"?>`)**
-   - **Root elements and nesting**
-   - **Well-formed XML rules**
-
-### 3. **Syntax**
-   - **Tags, attributes, and values**
-   - **Namespaces and schemas**
-
-### 4. **Elements**
-   - **Defining elements**
-   - **Attributes vs. elements**
-   - **Empty vs. non-empty elements**
-   - **Hierarchical structure in XML**
+### 6. **Basics of XML**
+   - **[What is XML?](#what-is-xml)**
+   - **[Key Concepts of XML](#key-concepts-of-xml)**
+   - **[Structure](#1structure)**
+   - **[Syntax](#1syntax)**
+   - **[Elements](#1elements)**
 
 ---
 
@@ -1544,3 +1532,785 @@ The `Comparable` and `Comparator` interfaces are used to define the natural orde
    - **Hibernate**: Uses annotations like `@Entity`, `@Table`, and `@Id` for mapping Java classes to database tables.
 
 ---
+
+#### 6. **Basics of XML**
+
+### <a name="what-is-xml"></a>**What is XML?**
+
+**XML (Extensible Markup Language)** is a versatile markup language used for storing and transporting data. XML is both human-readable and machine-readable, making it a popular choice for data interchange between systems. Unlike HTML, which is designed to display data, XML is designed to store and transport data, with a focus on what data is rather than how it looks.
+
+### <a name="key-concrpts-of-xml"></a>**Key Concepts of XML**
+
+1. **What is XML?**
+   - XML stands for **Extensible Markup Language**.
+   - It is a text-based format that is used to represent structured data.
+   - XML allows developers to define their own tags, making it highly flexible for a variety of applications.
+
+2. **XML Structure**
+   - XML documents have a tree-like structure, starting with a single root element that contains all other elements.
+   - Each element in XML can contain text, attributes, and other elements, allowing for a hierarchical organization of data.
+
+   **Example:**
+   ```xml
+   <note>
+       <to>Tove</to>
+       <from>Jani</from>
+       <heading>Reminder</heading>
+       <body>Don't forget me this weekend!</body>
+   </note>
+   ```
+   - In this example, `<note>` is the root element containing four child elements: `<to>`, `<from>`, `<heading>`, and `<body>`.
+
+3. **XML Declaration**
+   - An XML document often begins with an XML declaration, which defines the XML version and the encoding used in the document.
+
+   **Example:**
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   ```
+   - `version="1.0"` specifies the version of XML.
+   - `encoding="UTF-8"` specifies the character encoding used in the document.
+
+4. **XML Elements**
+   - XML elements are the building blocks of XML documents. An element consists of a start tag, content, and an end tag.
+   - **Start Tag**: Marks the beginning of an element.
+   - **End Tag**: Marks the end of an element.
+   - **Content**: The data contained within the element.
+
+   **Example:**
+   ```xml
+   <title>Introduction to XML</title>
+   ```
+   - In this example, `<title>` is the start tag, `Introduction to XML` is the content, and `</title>` is the end tag.
+
+5. **XML Attributes**
+   - Attributes provide additional information about elements. Attributes are defined within the start tag and consist of a name-value pair.
+
+   **Example:**
+   ```xml
+   <book category="fiction">
+       <title lang="en">Harry Potter</title>
+   </book>
+   ```
+   - In this example, `category="fiction"` is an attribute of the `<book>` element, and `lang="en"` is an attribute of the `<title>` element.
+
+   **Rules for Attributes:**
+   - Attribute values must always be enclosed in quotes.
+   - Single or double quotes can be used, but they must match.
+
+6. **XML Syntax Rules**
+   - **Case Sensitivity**: XML tags are case-sensitive. `<Book>` and `<book>` would be treated as different elements.
+   - **Proper Nesting**: Elements must be properly nested. An open tag must have a corresponding closing tag in the correct order.
+     
+     **Correct Example:**
+     ```xml
+     <book>
+         <title>XML Guide</title>
+     </book>
+     ```
+     
+     **Incorrect Example:**
+     ```xml
+     <book>
+         <title>XML Guide</book>
+     </title>
+     ```
+
+   - **Root Element**: Every XML document must have one root element that contains all other elements.
+   - **Empty Elements**: Elements with no content can be written as self-closing tags.
+
+     **Example:**
+     ```xml
+     <line-break />
+     ```
+
+7. **XML Comments**
+   - Comments in XML provide additional information but are not processed by the XML parser. They are useful for documenting the XML structure.
+
+   **Example:**
+   ```xml
+   <!-- This is a comment -->
+   <note>
+       <to>Tove</to>
+       <from>Jani</from>
+       <body>Remember me!</body>
+   </note>
+   ```
+
+8. **XML Namespaces**
+   - Namespaces are used to avoid naming conflicts by qualifying element names in XML documents. A namespace is declared using the `xmlns` attribute.
+   
+   **Example:**
+   ```xml
+   <root xmlns:h="http://www.w3.org/TR/html4/">
+       <h:table>
+           <h:tr>
+               <h:td>Apples</h:td>
+               <h:td>Bananas</h:td>
+           </h:tr>
+       </h:table>
+   </root>
+   ```
+   - Here, `xmlns:h="http://www.w3.org/TR/html4/"` declares a namespace with the prefix `h`. All elements prefixed with `h:` belong to this namespace.
+
+9. **XML Validation**
+   - XML documents can be validated against a set of rules defined in a **Document Type Definition (DTD)** or an **XML Schema**. Validation ensures that the XML document adheres to a predefined structure and data types.
+
+   **DTD Example:**
+   ```xml
+   <!DOCTYPE note [
+       <!ELEMENT note (to,from,heading,body)>
+       <!ELEMENT to (#PCDATA)>
+       <!ELEMENT from (#PCDATA)>
+       <!ELEMENT heading (#PCDATA)>
+       <!ELEMENT body (#PCDATA)>
+   ]>
+   ```
+
+   **XML Schema Example:**
+   ```xml
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+       <xs:element name="note">
+           <xs:complexType>
+               <xs:sequence>
+                   <xs:element name="to" type="xs:string"/>
+                   <xs:element name="from" type="xs:string"/>
+                   <xs:element name="heading" type="xs:string"/>
+                   <xs:element name="body" type="xs:string"/>
+               </xs:sequence>
+           </xs:complexType>
+       </xs:element>
+   </xs:schema>
+   ```
+
+10. **Common Uses of XML**
+    - **Data Interchange**: XML is widely used for exchanging data between different systems or platforms.
+    - **Configuration Files**: Many software applications use XML to store configuration settings.
+    - **Web Services**: XML is often used in SOAP (Simple Object Access Protocol) for web services communication.
+    - **Document Representation**: XML is used in formats like XHTML, SVG, and RSS for document representation and syndication.
+
+---
+
+### <a name="1structure"></a>**Structure**
+
+XML, or Extensible Markup Language, is designed to store and transport data in a structured format. The structure of an XML document is hierarchical, resembling a tree. This hierarchical structure allows XML to represent complex data models in a simple, organized manner.
+
+#### Key Components of XML Structure
+
+1. **Prolog**
+   - The prolog is the introductory part of an XML document. It may include an XML declaration, a document type definition (DTD), and processing instructions.
+   - **XML Declaration**: The XML declaration is optional but recommended. It specifies the version of XML being used and the character encoding for the document.
+
+   **Example:**
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   ```
+
+   - **DOCTYPE Declaration**: The DOCTYPE declaration defines the document type and DTD (Document Type Definition) used to validate the document.
+
+   **Example:**
+   ```xml
+   <!DOCTYPE note SYSTEM "note.dtd">
+   ```
+
+   - **Processing Instructions**: These are instructions to the application processing the XML document. They are optional and can appear anywhere in the document.
+
+   **Example:**
+   ```xml
+   <?xml-stylesheet type="text/xsl" href="style.xsl"?>
+   ```
+
+2. **Root Element**
+   - Every XML document must have one and only one root element. The root element is the top-level element that contains all other elements in the document.
+   - All other elements are nested within the root element.
+
+   **Example:**
+   ```xml
+   <note>
+       <to>Tove</to>
+       <from>Jani</from>
+       <heading>Reminder</heading>
+       <body>Don't forget me this weekend!</body>
+   </note>
+   ```
+   - In this example, `<note>` is the root element.
+
+3. **Elements**
+   - Elements are the primary building blocks of an XML document. Each element can contain text, attributes, and other elements.
+   - An element starts with a start tag and ends with an end tag. The content between the start and end tags can be text or other nested elements.
+
+   **Example:**
+   ```xml
+   <to>Tove</to>
+   ```
+   - Here, `<to>` is the start tag, `Tove` is the content, and `</to>` is the end tag.
+
+   **Nested Elements:**
+   ```xml
+   <note>
+       <to>Tove</to>
+       <from>Jani</from>
+       <heading>Reminder</heading>
+       <body>Don't forget me this weekend!</body>
+   </note>
+   ```
+   - In this example, `<note>` contains four child elements: `<to>`, `<from>`, `<heading>`, and `<body>`.
+
+4. **Attributes**
+   - Attributes provide additional information about elements. They are always placed within the start tag and follow the format `name="value"`.
+   - Attributes are often used to store metadata or properties associated with elements.
+
+   **Example:**
+   ```xml
+   <book category="fiction">
+       <title lang="en">Harry Potter</title>
+   </book>
+   ```
+   - In this example, `category="fiction"` is an attribute of the `<book>` element, and `lang="en"` is an attribute of the `<title>` element.
+
+5. **Text Content**
+   - Text content is the actual data contained within an element. It can be simple text, or it can include special characters, which may need to be escaped.
+   
+   **Example:**
+   ```xml
+   <message>Hello, World!</message>
+   ```
+   - Here, `Hello, World!` is the text content within the `<message>` element.
+
+   - **Escaping Special Characters**: If the text content contains special characters like `<`, `>`, `&`, etc., they must be escaped using predefined entities:
+     - `<` becomes `&lt;`
+     - `>` becomes `&gt;`
+     - `&` becomes `&amp;`
+     - `"` becomes `&quot;`
+     - `'` becomes `&apos;`
+
+     **Example:**
+     ```xml
+     <note>
+         <message>This &amp; that</message>
+     </note>
+     ```
+
+6. **Empty Elements**
+   - Empty elements are elements that do not have any content. They can be written in two ways:
+     - With a start and end tag, like `<line></line>`.
+     - As a self-closing tag, like `<line />`.
+
+   **Example:**
+   ```xml
+   <br />
+   ```
+
+7. **Comments**
+   - Comments in XML are used to provide notes or explanations within the document. They are not displayed in the output and are ignored by the parser.
+
+   **Example:**
+   ```xml
+   <!-- This is a comment -->
+   <note>
+       <to>Tove</to>
+       <from>Jani</from>
+   </note>
+   ```
+
+8. **CDATA Section**
+   - CDATA (Character Data) sections are used to include text data that should not be parsed by the XML parser. This is useful when the content includes characters that would otherwise be treated as markup.
+
+   **Example:**
+   ```xml
+   <script>
+       <![CDATA[
+           if (a < b) {
+               foo();
+           }
+       ]]>
+   </script>
+   ```
+   - In this example, everything within `<![CDATA[` and `]]>` is treated as character data, and special characters like `<` are not parsed.
+
+9. **Namespaces**
+   - Namespaces are used to avoid naming conflicts in XML documents. A namespace is defined by a URI and is declared using the `xmlns` attribute. Elements within a namespace are prefixed with a label, distinguishing them from other elements with the same name.
+
+   **Example:**
+   ```xml
+   <root xmlns:h="http://www.w3.org/TR/html4/">
+       <h:table>
+           <h:tr>
+               <h:td>Apples</h:td>
+               <h:td>Bananas</h:td>
+           </h:tr>
+       </h:table>
+   </root>
+   ```
+   - Here, `xmlns:h="http://www.w3.org/TR/html4/"` declares a namespace for the HTML elements prefixed with `h:`.
+
+10. **Document Type Definition (DTD) and XML Schema**
+    - **DTD**: A DTD defines the structure and the legal elements and attributes of an XML document. It can be included within the XML document or referenced externally.
+
+    **Example:**
+    ```xml
+    <!DOCTYPE note [
+        <!ELEMENT note (to,from,heading,body)>
+        <!ELEMENT to (#PCDATA)>
+        <!ELEMENT from (#PCDATA)>
+        <!ELEMENT heading (#PCDATA)>
+        <!ELEMENT body (#PCDATA)>
+    ]>
+    ```
+
+    - **XML Schema**: An XML Schema defines the structure of an XML document, as well as the data types of elements and attributes. Unlike DTD, XML Schema is more powerful and supports data types.
+
+    **Example:**
+    ```xml
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:element name="note">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="to" type="xs:string"/>
+                    <xs:element name="from" type="xs:string"/>
+                    <xs:element name="heading" type="xs:string"/>
+                    <xs:element name="body" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>
+    ```
+
+---
+
+### <a name="1syntax"></a>**Syntax**
+
+XML (Extensible Markup Language) has a specific syntax that governs how XML documents are structured and written. Adhering to XML syntax rules ensures that the document is well-formed and can be correctly parsed by XML processors. Here’s a detailed explanation of XML syntax:
+
+#### 1. **XML Declaration**
+
+- The XML declaration is optional but recommended. It is placed at the very beginning of an XML document and defines the XML version and the character encoding.
+
+**Syntax:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+```
+
+- `version="1.0"` specifies the version of XML being used. The current version is 1.0.
+- `encoding="UTF-8"` specifies the character encoding used in the document. UTF-8 is commonly used, but other encodings like ISO-8859-1 can also be specified.
+
+#### 2. **Root Element**
+
+- An XML document must have a single root element that contains all other elements. The root element encapsulates the entire XML document.
+
+**Syntax:**
+```xml
+<root>
+    <!-- Child elements go here -->
+</root>
+```
+
+#### 3. **Elements**
+
+- Elements are the fundamental building blocks of XML. They consist of a start tag, optional content, and an end tag.
+
+**Syntax:**
+```xml
+<elementName>Content</elementName>
+```
+
+- **Start Tag**: `<elementName>`
+- **End Tag**: `</elementName>`
+- **Content**: The data or other elements enclosed by the start and end tags.
+
+**Example:**
+```xml
+<message>Hello, World!</message>
+```
+
+#### 4. **Attributes**
+
+- Attributes provide additional information about elements. They are specified within the start tag of an element as name-value pairs.
+
+**Syntax:**
+```xml
+<elementName attributeName="value">Content</elementName>
+```
+
+- **Attribute Name**: The name of the attribute.
+- **Attribute Value**: The value assigned to the attribute, enclosed in quotes.
+
+**Example:**
+```xml
+<book category="fiction">Harry Potter</book>
+```
+- Here, `category="fiction"` is an attribute of the `<book>` element.
+
+#### 5. **Empty Elements**
+
+- Empty elements, or elements with no content, can be represented in two ways: with an end tag or as self-closing tags.
+
+**Syntax:**
+- With an end tag:
+```xml
+<line></line>
+```
+
+- Self-closing tag:
+```xml
+<line />
+```
+
+**Example:**
+```xml
+<break />
+```
+
+#### 6. **Comments**
+
+- Comments are used to include notes or explanations within the XML document. They are not processed by XML parsers and are ignored during parsing.
+
+**Syntax:**
+```xml
+<!-- This is a comment -->
+```
+
+**Example:**
+```xml
+<!-- This is a comment -->
+<note>
+    <to>Tove</to>
+    <from>Jani</from>
+</note>
+```
+
+#### 7. **CDATA Sections**
+
+- CDATA sections are used to include blocks of text that should not be parsed by the XML parser. They are useful for including data that contains characters that would otherwise be treated as markup.
+
+**Syntax:**
+```xml
+<![CDATA[Text that includes <, >, & characters]]>
+```
+
+**Example:**
+```xml
+<script>
+    <![CDATA[
+        if (a < b) {
+            foo();
+        }
+    ]]>
+</script>
+```
+
+#### 8. **Namespaces**
+
+- Namespaces are used to avoid naming conflicts by qualifying element names with a unique identifier. They are declared using the `xmlns` attribute.
+
+**Syntax:**
+```xml
+<elementName xmlns:prefix="namespaceURI">
+    <!-- Child elements -->
+</elementName>
+```
+
+**Example:**
+```xml
+<book xmlns:ns="http://example.com/schema">
+    <ns:title>XML Guide</ns:title>
+</book>
+```
+
+- `xmlns:ns="http://example.com/schema"` declares a namespace with the prefix `ns`.
+
+#### 9. **Document Type Definition (DTD)**
+
+- DTD defines the structure and rules for XML documents. It specifies the allowed elements and attributes.
+
+**Syntax:**
+- Internal DTD:
+```xml
+<!DOCTYPE rootElement [
+    <!ELEMENT rootElement (childElement)>
+    <!ELEMENT childElement (#PCDATA)>
+]>
+```
+
+- External DTD:
+```xml
+<!DOCTYPE rootElement SYSTEM "file.dtd">
+```
+
+**Example:**
+```xml
+<!DOCTYPE note [
+    <!ELEMENT note (to,from,heading,body)>
+    <!ELEMENT to (#PCDATA)>
+    <!ELEMENT from (#PCDATA)>
+    <!ELEMENT heading (#PCDATA)>
+    <!ELEMENT body (#PCDATA)>
+]>
+<note>
+    <to>Tove</to>
+    <from>Jani</from>
+    <heading>Reminder</heading>
+    <body>Don't forget me this weekend!</body>
+</note>
+```
+
+#### 10. **XML Schema (XSD)**
+
+- XML Schema defines the structure, data types, and constraints of XML documents. It is more powerful than DTD and is written in XML syntax.
+
+**Syntax:**
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="elementName" type="xs:string"/>
+</xs:schema>
+```
+
+**Example:**
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="note">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="to" type="xs:string"/>
+                <xs:element name="from" type="xs:string"/>
+                <xs:element name="heading" type="xs:string"/>
+                <xs:element name="body" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+```
+
+#### 11. **Encoding**
+
+- XML documents can be encoded using various character encodings. The encoding must be declared in the XML declaration.
+
+**Syntax:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+```
+
+- `UTF-8` is the most common encoding, but other encodings such as `ISO-8859-1` can also be used.
+
+---
+
+### <a name="1elements"></a>**Elements**
+
+XML elements are fundamental components of XML (Extensible Markup Language) documents. They are used to structure and organize data within an XML document. Understanding XML elements is crucial for creating and manipulating XML documents effectively.
+
+#### 1. **Basic Structure of Elements**
+
+- An XML element consists of a start tag, content, and an end tag.
+
+**Syntax:**
+```xml
+<elementName>Content</elementName>
+```
+
+- **Start Tag**: `<elementName>`
+  - The start tag marks the beginning of the element.
+  - It contains the element name and can also include attributes.
+
+- **Content**: The data or nested elements between the start and end tags.
+  - Content can be plain text, other elements, or a combination of both.
+
+- **End Tag**: `</elementName>`
+  - The end tag marks the end of the element.
+  - It contains a forward slash before the element name.
+
+**Example:**
+```xml
+<greeting>Hello, World!</greeting>
+```
+
+In this example:
+- `<greeting>` is the start tag.
+- `Hello, World!` is the content.
+- `</greeting>` is the end tag.
+
+#### 2. **Nested Elements**
+
+- XML elements can contain other elements, creating a hierarchical structure.
+
+**Syntax:**
+```xml
+<parentElement>
+    <childElement>Content</childElement>
+</parentElement>
+```
+
+**Example:**
+```xml
+<note>
+    <to>Tove</to>
+    <from>Jani</from>
+    <heading>Reminder</heading>
+    <body>Don't forget me this weekend!</body>
+</note>
+```
+
+In this example:
+- `<note>` is the root element.
+- It contains four child elements: `<to>`, `<from>`, `<heading>`, and `<body>`.
+
+#### 3. **Empty Elements**
+
+- Empty elements are elements that do not contain any content. They can be represented in two ways:
+  - With an end tag: `<elementName></elementName>`
+  - As a self-closing tag: `<elementName />`
+
+**Syntax:**
+```xml
+<elementName />
+```
+
+**Example:**
+```xml
+<br />
+```
+
+This self-closing tag represents an empty element in XHTML.
+
+#### 4. **Attributes**
+
+- Elements can have attributes that provide additional information. Attributes are included in the start tag.
+
+**Syntax:**
+```xml
+<elementName attributeName="value">Content</elementName>
+```
+
+- **Attribute Name**: The name of the attribute.
+- **Attribute Value**: The value assigned to the attribute, enclosed in quotes.
+
+**Example:**
+```xml
+<book category="fiction">Harry Potter</book>
+```
+
+In this example:
+- `category="fiction"` is an attribute of the `<book>` element.
+
+#### 5. **Element Names**
+
+- Element names must adhere to specific rules:
+  - They must start with a letter or underscore.
+  - They can be followed by letters, digits, hyphens, underscores, or periods.
+  - Element names are case-sensitive.
+
+**Valid Element Names:**
+```xml
+<firstName>John</firstName>
+<last_name>Doe</last_name>
+```
+
+**Invalid Element Names:**
+```xml
+<1stName>John</1stName> <!-- Starts with a digit -->
+<last-name>Doe</last-name> <!-- Contains a hyphen -->
+```
+
+#### 6. **Mixed Content**
+
+- Elements can contain both text and nested elements. This is known as mixed content.
+
+**Syntax:**
+```xml
+<parentElement>Text <childElement>Nested Text</childElement> More Text</parentElement>
+```
+
+**Example:**
+```xml
+<message>Hello <name>John</name>, how are you?</message>
+```
+
+In this example:
+- `<message>` contains text and a nested `<name>` element with text content.
+
+#### 7. **CDATA Sections**
+
+- CDATA (Character Data) sections allow including text that should not be parsed by the XML parser. This is useful for including data with special characters.
+
+**Syntax:**
+```xml
+<![CDATA[Text that includes <, >, & characters]]>
+```
+
+**Example:**
+```xml
+<description><![CDATA[This is a <b>bold</b> statement]]></description>
+```
+
+#### 8. **Comments**
+
+- Comments can be included within elements but not as part of the element content. Comments are not displayed or processed.
+
+**Syntax:**
+```xml
+<!-- This is a comment -->
+<elementName>Content</elementName>
+```
+
+**Example:**
+```xml
+<note>
+    <!-- This is a comment -->
+    <to>Tove</to>
+    <from>Jani</from>
+</note>
+```
+
+#### 9. **Namespaces**
+
+- Namespaces are used to avoid naming conflicts by qualifying element names with a unique identifier. They are declared using the `xmlns` attribute.
+
+**Syntax:**
+```xml
+<elementName xmlns:prefix="namespaceURI">
+    <!-- Child elements -->
+</elementName>
+```
+
+**Example:**
+```xml
+<book xmlns:ns="http://example.com/schema">
+    <ns:title>XML Guide</ns:title>
+</book>
+```
+
+#### 10. **Schema Validation**
+
+- XML Schema (XSD) defines the structure and constraints of XML elements and attributes. It specifies the allowed elements, their order, and their data types.
+
+**Example:**
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="note">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="to" type="xs:string"/>
+                <xs:element name="from" type="xs:string"/>
+                <xs:element name="heading" type="xs:string"/>
+                <xs:element name="body" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+```
+
+#### 11. **Self-Closing Tags**
+
+- Self-closing tags are used for elements that do not have any content. They are written with a trailing slash before the closing angle bracket.
+
+**Syntax:**
+```xml
+<elementName />
+```
+
+**Example:**
+```xml
+<line />
+```
+
+---
+
